@@ -10,10 +10,9 @@ import { Food } from 'src/app/shared/models/Food';
 export class HomeComponent implements OnInit{
 foods:Food[] = [];
 constructor(private foodService:FoodService) {
-  this.foods = foodService.getAll();
+  this.foods = foodService.getAll()
  }
 
 ngOnInit(): void {
-  
 }
 }

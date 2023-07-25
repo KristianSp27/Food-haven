@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component,Input } from '@angular/core';
 
 @Component({
   selector: 'star-rating',
@@ -8,15 +8,17 @@ import { Component, Input } from '@angular/core';
 export class StarRatingComponent {
 
   @Input()
-  stars! number;
+  stars!: number;
 
   @Input()
   size: number = 1;
 
   get styles() {
-    'width.rem': this.size,
-    'height.rem': this.size,
-    'marginRight.rem': this.size / 6,
+    return {
+      'width.rem': this.size,
+      'height.rem': this.size,
+      'marginRight.rem': this.size / 6,
+    }
   }
 
   getStarImage(current: number): string{
@@ -26,7 +28,7 @@ export class StarRatingComponent {
     ? 'star-full'
     : this.stars >= previousHalf
     ? 'star-half'
-    ? 'star-empty';
-    return `assets/stars/${imageName}.svg`;
+    : 'star-empty';
+    return `/assets/stars/${imageName}.svg`;
   }
 }

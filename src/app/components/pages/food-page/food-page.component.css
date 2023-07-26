@@ -63,13 +63,12 @@ img{
     background-color: red;
 }
 
-div{
+tags{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
 }
 
-div a{
+tags a{
     background-color: #f0f0f0;
     padding: 0.3rem 1rem;
     margin: 0.2rem 0.15rem;

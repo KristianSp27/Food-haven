@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { sample_foods } from "./data";
 
 const app = express();
 app.use(cors({
@@ -8,7 +9,7 @@ app.use(cors({
 }));
 
 app.get("/api/foods", (req, res) => {
-    res.send("hello world");
+    res.send(sample_foods);
 })
 
 const port = 5000;

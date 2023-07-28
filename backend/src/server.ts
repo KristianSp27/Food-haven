@@ -3,6 +3,7 @@ import cors from "cors";
 import { sample_foods, sample_tags } from "./data";
 
 const app = express();
+app.use(express.json());
 app.use(cors({
     credentials:true,
     origin:["http://localhost:4200"]
@@ -32,6 +33,10 @@ app.get("/api/foods/:foodId", (req, res) => {
     const foodId = req.params.foodId;
     const food = sample_foods.find(food => food.id == foodId);
     res.send(food);
+})
+
+app.post("/api/users/login", (req, res) => {
+    const body = req.body;
 })
 
 const port = 5000;

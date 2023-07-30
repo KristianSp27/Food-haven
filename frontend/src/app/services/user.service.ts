@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { USER_LOGIN_URL } from '../shared/constants/urls';
 import { ToastrService } from 'ngx-toastr';
 
+const USER_KEY = 'User';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,5 +31,15 @@ this.toastrService.error(errorResponse.error, 'Login failed');
     
   })
 );
+   }
+
+   private setUserToLocalStorage(user:User){
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+   }
+
+   private getUserFromLocalStorage():User{
+    const userJson = localStorage.getItem(USER_KEY);
+    if(userJson) return JSON.parse(userJson) as User;
+    return new User();
    }
 }

@@ -3,11 +3,11 @@
         <a routerLink="/" class="logo">Food Haven</a>
         <nav>
             <ul>
-                <li>
+                <li *ngIf="!user.token">
                     <a routerLink="/login">Login</a>
                 </li>
                 <li class="menu-container">
-                    <a routerLink="/dashboard">John</a>
+                    <a routerLink="/dashboard">{{user.name}}</a>
                     <div class="menu">
                         <a routerLink="/profile">Profile</a>
                         <a routerLink="/orders">Orders</a>

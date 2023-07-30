@@ -11,7 +11,7 @@ const USER_KEY = 'User';
   providedIn: 'root'
 })
 export class UserService {
-private userSubject = new BehaviorSubject<User>(new User());
+private userSubject = new BehaviorSubject<User>(this.getUserFromLocalStorage());
 public userObservable:Observable<User>;
   constructor(private http:HttpClient, private toastrService:ToastrService) {
     this.userObservable = this.userSubject.asObservable();
@@ -21,6 +21,7 @@ public userObservable:Observable<User>;
 return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
   tap({
     next: (user) =>{
+      this.setUserToLocalStorage(user);
 this.userSubject.next(user);
 this.toastrService.success(`Welcome to the Food Haven, ${user.name}!`,
 'Login Successful')

@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { InputContainerComponent } from './components/partials/input-container/input-container.component';
+import { InputValidationComponent } from './components/partials/input-validation/input-validation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { InputContainerComponent } from './components/partials/input-container/i
     TitleComponent,
     NotFoundComponent,
     LoginPageComponent,
-    InputContainerComponent
+    InputContainerComponent,
+    InputValidationComponent
   ],
   imports: [
     BrowserModule,

@@ -4,13 +4,14 @@
 
         <form [formGroup]="loginForm" (ngSubmit)="submit()">
      
-
-            <text-input
-            [control]="fc.email"
-            [showErrorsWhen]="isSubmitted"
-            type="email"
-            label="Email">
-          </text-input>
+<input-container label="Email">
+<input type="email" placeholder="Email" formControlName="email"/>
+<input-validation
+[control]="fc.email"
+[showErrorsWhen]="isSubmitted">
+</input-validation>
+</input-container>
+          
            
             <div class="input-container">
                 <label>Password</label>

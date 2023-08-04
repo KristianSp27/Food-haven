@@ -12,7 +12,7 @@ router.get("/seed", asyncHandler(
         res.send("Seed is already done!");
         return;
     }
-    
+
     await FoodModel.create(sample_foods);
     res.send("Seed is done!");
 }
@@ -21,7 +21,7 @@ router.get("/seed", asyncHandler(
 router.get("/", asyncHandler(
     async (req, res) => {
         const foods = await FoodModel.find();
-        res.send(foods);
+        res.send(sample_foods);
     }
 ))
 

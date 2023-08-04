@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { sample_foods, sample_tags, sample_users } from "./data";
-import jwt from "jsonwebtoken";
 import foodRouter from './routers/food.router';
+import userRouter from './routers/user.router';
 
 const app = express();
 app.use(express.json());
@@ -12,29 +11,8 @@ app.use(cors({
 }));
 
 app.use("/api/foods", foodRouter);
+app.use("/api/users", userRouter);
 
-app.post("/api/users/login", (req, res) => {
-    const body = req.body;
-    const {email, password} = req.body;
-    const user = sample_users.find(user => user.email === email && user.password === password);
-
-    if(user){
-        res.send(generateTokenResponse(user));
-    } else {
-        res.status(400).send("Email or password is not valid!")
-    }
-})
-
-const generateTokenResponse = (user:any) => {
-const token = jwt.sign({
-    email:user.email, isAdmin:user.isAdmin
-},"SomeRandomText", {
-    expiresIn: "30d"
-});
-
-user.token = token;
-return user;
-}
 
 const port = 5000;
 app.listen(port, () => {

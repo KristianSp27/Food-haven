@@ -1,4 +1,3 @@
-import { error } from 'console';
 import {connect, ConnectOptions} from 'mongoose';
 
 export const dbConnect = () => {

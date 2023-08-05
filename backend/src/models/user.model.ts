@@ -1,12 +1,12 @@
-import { Schema, model } from "mongoose";
+import {Schema, model} from 'mongoose';
 
 export interface User{
-    id:string,
-    email:string,
-    password:string,
-    name:string,
-    address:string,
-    isAdmin:boolean
+    id:string;
+    email:string;
+    password: string;
+    name:string;
+    address:string;
+    isAdmin:boolean;
 }
 
 export const UserSchema = new Schema<User>({
@@ -17,11 +17,11 @@ export const UserSchema = new Schema<User>({
     isAdmin: {type: Boolean, required: true},
 }, {
     timestamps: true,
-    toJSON: {
+    toJSON:{
         virtuals: true
     },
     toObject:{
-        virtuals:true
+        virtuals: true
     }
 });
 

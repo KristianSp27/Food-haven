@@ -22,12 +22,15 @@ router.get("/", asyncHandler(
     async (req, res) => {
         const foods = await FoodModel.find();
         res.send(sample_foods);
+        res.send(foods);
     }
 ))
 
 router.get("/search/:searchTerm", (req, res) => {
     const searchTerm = req.params.searchTerm;
-    const foods = sample_foods.filter(food => food.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    const foods = sample_foods
+    .filter(food => food.name.toLowerCase()
+    .includes(searchTerm.toLowerCase()))
     res.send(foods);
 })
 

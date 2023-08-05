@@ -26,15 +26,16 @@ router.get("/", asyncHandler(
     }
 ))
 
-router.get("/search/:searchTerm", (req, res) => {
-    const searchTerm = req.params.searchTerm;
-    const foods = sample_foods
-    .filter(food => food.name.toLowerCase()
-    .includes(searchTerm.toLowerCase()))
-    res.send(foods);
-})
+router.get("/search/:searchTerm", asyncHandler(
+    async (req, res) => {
+        const searchRegex = new RegExp(req.params.searchTerm, 'i');
+       const foods = await FoodModel.find({name: {$regex:searchRegex}})
+        res.send(foods);
+        res.send(sample_foods);
+    }
+))
 
-router.get("/tags", (req, res) => {
+router.get("/tags", async (req, res) => {
     res.send(sample_tags);
 })
 

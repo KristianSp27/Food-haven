@@ -3,7 +3,7 @@ import { sample_users } from '../data';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import { User, UserModel } from '../models/user.model';
-// import { HTTP_BAD_REQUEST } from '../constants/http_status';
+import { HTTP_BAD_REQUEST } from '../constants/http_status';
 import bcrypt from 'bcryptjs';
 const router = Router();
 
@@ -29,7 +29,7 @@ router.post("/login", asyncHandler(
       res.send(generateTokenReponse(user));
      }
      else{
-    //   res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
+       res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
      }
   
   }
@@ -40,8 +40,8 @@ router.post('/register', asyncHandler(
     const {name, email, password, address} = req.body;
     const user = await UserModel.findOne({email});
     if(user){
-     // res.status(HTTP_BAD_REQUEST)
-    //  .send('User is already exist, please login!');
+      res.status(HTTP_BAD_REQUEST)
+      .send('User is already exist, please login!');
       return;
     }
 

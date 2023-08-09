@@ -3,8 +3,9 @@ import { sample_users } from '../data';
 import jwt from 'jsonwebtoken';
 import asyncHandler from 'express-async-handler';
 import { User, UserModel } from '../models/user.model';
-// import { HTTP_BAD_REQUEST } from '../constants/http_status';
 import bcrypt from 'bcryptjs';
+import { HTTP_BAD_REQUEST } from '../constants/http_status';
+
 const router = Router();
 
 router.get("/seed", asyncHandler(
@@ -29,35 +30,37 @@ router.post("/login", asyncHandler(
       res.send(generateTokenReponse(user));
      }
      else{
-    //   res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
+      res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
      }
   
   }
 ))
   
+
 router.post('/register', asyncHandler(
-  async (req, res) => {
+  async (req, res) => { 
     const {name, email, password, address} = req.body;
     const user = await UserModel.findOne({email});
     if(user){
-     // res.status(HTTP_BAD_REQUEST)
-    //  .send('User is already exist, please login!');
+      res.status(HTTP_BAD_REQUEST)
+      .send('User already exists!. Please, login!');
       return;
     }
 
-    const encryptedPassword = await bcrypt.hash(password, 10);
+const encryptedPassword = await bcrypt.hash(password, 10);
 
-    const newUser:User = {
-      id:'',
-      name,
-      email: email.toLowerCase(),
-      password: encryptedPassword,
-      address,
-      isAdmin: false
-    }
+const newUser:User = {
+  id:'',
+  name,
+  email: email.toLowerCase(),
+  password: encryptedPassword,
+  address,
+  isAdmin: false
+}
 
-    const dbUser = await UserModel.create(newUser);
-    res.send(generateTokenReponse(dbUser));
+const dbUser = await UserModel.create(newUser);
+res.send(generateTokenReponse(dbUser));
+
   }
 ))
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/shared/models/user';
@@ -8,24 +8,28 @@ import { User } from 'src/app/shared/models/user';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
-cartQuantity = 0;
-user!:User;
-constructor(cartService:CartService, private userService:UserService){
-  cartService.getCartObservable().subscribe((newCart) => {
-    this.cartQuantity = newCart.totalCount;
-  })
+export class HeaderComponent implements OnInit {
 
-  userService.userObservable.subscribe((newUser) => {
-this.user = newUser;
-  })
-}
+  cartQuantity=0;
+  user!:User;
+  constructor(cartService:CartService,private userService:UserService) {
+    cartService.getCartObservable().subscribe((newCart) => {
+      this.cartQuantity = newCart.totalCount;
+    })
 
-logout(){
-  this.userService.logout();
-}
+    userService.userObservable.subscribe((newUser) => {
+      this.user = newUser;
+    })
+   }
 
-get isAuth(){
-  return this.user.token;
-}
+  ngOnInit(): void {
+  }
+
+  logout(){
+    this.userService.logout();
+  }
+
+  get isAuth(){
+    return this.user.token;
+  }
 }

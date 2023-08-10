@@ -1,17 +1,17 @@
-.container {
+.container{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     margin-top: 3rem;
-}
-
-.details {
+  }
+  
+  .details{
     width: 25rem;
-}
-
-.login{
+  }
+  
+  .login{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }

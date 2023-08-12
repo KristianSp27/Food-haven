@@ -17,16 +17,21 @@ export class LoadingInterceptor implements HttpInterceptor {
   constructor(private loadingService: LoadingService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    this.loadingService.showLoading();
+
+    const loadingTimeout = setTimeout(() => {
+      this.loadingService.showLoading();
+    }, 400);
     pendingRequests = pendingRequests + 1;
     return next.handle(request).pipe(
       tap({
         next:(event) => {
           if(event.type === HttpEventType.Response){
+            clearTimeout(loadingTimeout);
             this.handleHideLoading();
           }
         },
         error: (_) => {
+          clearTimeout(loadingTimeout);
           this.handleHideLoading();
         }
       })

@@ -14,7 +14,7 @@ router.get("/seed", asyncHandler(
        res.send("Seed is already done!");
        return;
      }
- 
+
      await UserModel.create(sample_users);
      res.send("Seed Is Done!");
  }
@@ -24,17 +24,17 @@ router.post("/login", asyncHandler(
   async (req, res) => {
     const {email, password} = req.body;
     const user = await UserModel.findOne({email});
-  
+
      if(user && (await bcrypt.compare(password,user.password))) {
       res.send(generateTokenReponse(user));
      }
      else{
        res.status(HTTP_BAD_REQUEST).send("Username or password is invalid!");
      }
-  
+
   }
 ))
-  
+
 router.post('/register', asyncHandler(
   async (req, res) => {
     const {name, email, password, address} = req.body;
@@ -48,7 +48,6 @@ router.post('/register', asyncHandler(
     const encryptedPassword = await bcrypt.hash(password, 10);
 
     const newUser:User = {
-      id:'',
       name,
       email: email.toLowerCase(),
       password: encryptedPassword,
@@ -67,7 +66,7 @@ router.post('/register', asyncHandler(
     },process.env.JWT_SECRET!,{
       expiresIn:"30d"
     });
-  
+
     return {
       id: user.id,
       email: user.email,
@@ -77,6 +76,6 @@ router.post('/register', asyncHandler(
       token: token
     };
   }
-  
+
 
   export default router;

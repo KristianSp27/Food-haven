@@ -20,5 +20,11 @@ asyncHandler(async (req:any, res:any) => {
     await OrderModel.deleteOne({
         user: req.user.id,
         status: OrderStatus.NEW
-    })
+    });
+
+    const newOrder = new OrderModel({...requestOrder, user: req.user.id});
+    await newOrder.save();
+    res.send(newOrder);
 }))
+
+export default router;

@@ -44,10 +44,10 @@ export class CheckoutPageComponent implements OnInit {
       return;
     }
 
-   if(!this.order.addressLatLng){
-    this.toastrService.warning('Please, select your location on the map!', 'Location');
-    return;
-   }
+    if(!this.order.addressLatLng){
+      this.toastrService.warning('Please select your location on the map', 'Location');
+      return;
+    }
 
     this.order.name = this.fc.name.value;
     this.order.address = this.fc.address.value;
@@ -56,8 +56,8 @@ export class CheckoutPageComponent implements OnInit {
       next:() => {
         this.router.navigateByUrl('/payment');
       },
-      error:(errorRespone) => {
-        this.toastrService.error(errorRespone, 'Cart');
+      error:(errorResponse) => {
+        this.toastrService.error(errorResponse.error, 'Cart');
       }
     })
   }
